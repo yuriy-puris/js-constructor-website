@@ -1,36 +1,29 @@
-export function title(item) {
-    return `
-        <div class="row">
-            <div class="col-sm">
-                <h1>${item.value}</h1>
-            </div>
-        </div>
-    `
+import { row, col, css } from './utils';
+
+function title(item) {
+    const { tag = 'h1', styles } = item.options;
+    return row(col(`<${tag}>${item.value}</${tag}>`), css(styles))
 };
 
-export function text(item) {
-    return `
-        <div class="row">
-            <div class="col-sm">
-                <p>${item.value}</p>
-            </div>
-        </div>
-    `
+function text(item) {
+    const { styles } = item.options;
+    return row(col(`<p>${item.value}</p>`), css(styles))
 };
 
-export function columns(item) {
-    const html = item.value.map(column => `<div class="col-sm">${column}</div>`)
-    return `
-        <div class="row">
-            ${html.join('')}
-        </div>
-    `;
+function column(item) {
+    const { styles } = item.options;
+    const html = item.value.map(col).join('');
+    return row(html, css(styles));
 };
 
-export function image(item) {
-    return `
-        <div class="row">
-            <img src="${item.value}" />
-        </div>
-    `;
+function image(item) {
+    const { styles, imageStyles, alt } = item.options;
+    return row(`<img src="${item.value}" alt="${alt}" style="${css(imageStyles)}" />`, css(styles))
 };
+
+export const templates = {
+    title,
+    text,
+    image,
+    column
+}
