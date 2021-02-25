@@ -20,3 +20,11 @@
     box-shadow: inset -1px 0 0 rgba(0,0,0, .1);
     overflow-y: auto;
 }
+
+form {
+    margin: 0 0 1rem;
+}
+
+.form-group {
+    margin: 0 0 1rem;
+}
